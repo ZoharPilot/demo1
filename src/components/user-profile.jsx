@@ -11,7 +11,7 @@ const UserProfile = () => {
  <header className="pt-6 px-4 pb-4 bg-white shadow-sm flex items-center justify-between">
   <div className="flex items-center gap-4">
     <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200">
-      <img src={`/${import.meta.env.BASE_URL}images/profiles/user_003.jpg`} className="w-full h-full object-cover rounded-full" />
+      <img src={`${import.meta.env.BASE_URL}images/profiles/user_003.jpg`} className="w-full h-full object-cover rounded-full" />
     </div>
     <h1 className="text-2xl font-bold text-gray-800">Sarah Bennett</h1>
   </div>
