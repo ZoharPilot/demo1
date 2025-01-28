@@ -5,7 +5,7 @@ import UserProfile from './components/user-profile';
 function App() {
   // קבע את הבסיס דינמית
   const basename = import.meta.env.PROD ? '/demo1' : '/';
-  
+    console.log('BASE_URL:', import.meta.env.BASE_URL);
 
   return (
     <Router basename={basename}>
