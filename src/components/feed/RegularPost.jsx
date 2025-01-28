@@ -9,7 +9,7 @@ const RegularPost = ({ post }) => {
         <div className="flex items-center gap-2 mb-3">
           <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200">
             <img 
-                src={`/images/profiles/user_003.jpg`}
+                src={`./images/profiles/user_003.jpg`}
               alt={post.user}
               className="w-full h-full object-cover rounded-full"
             />
@@ -30,7 +30,7 @@ const RegularPost = ({ post }) => {
               </div>
               <div className="w-64 rounded-lg overflow-hidden shadow-md">
                 <img 
-                  src={`/images/Feeds/r/1.png`}
+                  src={`./images/Feeds/r/1.png`}
                   alt="Original request"
                   className="w-full h-48 object-cover"
                 />
@@ -50,7 +50,7 @@ const RegularPost = ({ post }) => {
               <div key={index} className="flex-none relative">
                 <div className="w-64 rounded-lg overflow-hidden shadow-md">
                   <img 
-                   src={`/images/Feeds/r/${String(index + 2)}.png`}
+                   src={`./images/Feeds/r/${String(index + 2)}.png`}
                     alt={`${edit.editor}'s edit`}
                     className="w-full h-48 object-cover"
                   />

@@ -13,7 +13,7 @@ const StoryBanner = () => {
               <div className="w-16 h-16 rounded-full p-1 bg-gradient-to-tr from-purple-500 via-pink-500 to-orange-500">
                 <div className="bg-white p-0.5 rounded-full w-full h-full">
                   <img 
-                  src={`/images/profiles/user_${String(index + 1).padStart(3, '0')}.jpg`}
+                  src={`./images/profiles/user_${String(index + 1).padStart(3, '0')}.jpg`}
                     alt={`User ${name}`}
                     className="w-full h-full rounded-full object-cover"
                   />

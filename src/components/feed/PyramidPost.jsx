@@ -9,7 +9,7 @@ const PyramidPost = ({ post }) => {
         <div className="flex items-center gap-2 mb-3">
           <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200">
             <img 
-              src={`/images/profiles/user_002.jpg`}
+              src={`./images/profiles/user_002.jpg`}
               alt={post.user}
             />
           </div>
@@ -36,10 +36,10 @@ const PyramidPost = ({ post }) => {
                   </div>
                 )}
 
-                <div className="w-64 rounded-lg overflow-hidden shadow-md bg-white mb-2">
+                <div className="w-64 rounded-lg overflow-hidden shadow-md bg-white mb-">
                   {index === array.length - 1 ? (
                     <video 
-                      src={`/images/Feeds/p/4.mp4`} 
+                      src={`./images/Feeds/p/4.mp4`} 
                       controls 
                       className="w-[800px] aspect-[6/5] rounded-lg object-cover"
                     >
@@ -47,7 +47,7 @@ const PyramidPost = ({ post }) => {
                     </video>
                   ) : (
                     <img 
-                      src={`/images/Feeds/p/${String(index + 1)}.png`} 
+                      src={`./images/Feeds/p/${String(index + 1)}.png`} 
                       alt={`Feed ${index + 1}`}
                       className="w-[800px] aspect-[6/5] rounded-lg object-cover"
                     />
