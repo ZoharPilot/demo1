@@ -6,5 +6,8 @@ export default defineConfig(({ mode }) => {
   return {
     base: isProduction ? '/demo1/' : '/', // תואם לנתיב שלך בפרודקשן
     plugins: [react()],
+      build: {
+    outDir: 'docs', // שינוי יעד ה-Build לתיקייה docs
+  },
   };
 });
