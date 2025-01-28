@@ -30,7 +30,7 @@ const RegularPost = ({ post }) => {
               </div>
               <div className="w-64 rounded-lg overflow-hidden shadow-md">
                 <img 
-                  src={`./images/Feeds/r/1.png`}
+                  src={`/images/Feeds/r/1.png`}
                   alt="Original request"
                   className="w-full h-48 object-cover"
                 />
@@ -50,7 +50,7 @@ const RegularPost = ({ post }) => {
               <div key={index} className="flex-none relative">
                 <div className="w-64 rounded-lg overflow-hidden shadow-md">
                   <img 
-                   src={`./images/Feeds/r/${String(index + 2)}.png`}
+                   src={`/images/Feeds/r/${String(index + 2)}.png`}
                     alt={`${edit.editor}'s edit`}
                     className="w-full h-48 object-cover"
                   />
