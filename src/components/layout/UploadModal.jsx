@@ -1,6 +1,6 @@
+import { motion } from 'framer-motion';
+import { Upload, X } from 'lucide-react';
 import React from 'react';
-import { X, Upload } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const UploadModal = ({ isOpen, onClose, uploadedImage, setUploadedImage }) => {
   if (!isOpen) return null;
