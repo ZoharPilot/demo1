@@ -9,7 +9,7 @@ const RegularPost = ({ post }) => {
         <div className="flex items-center gap-2 mb-3">
           <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200">
             <img 
-                src={`.${import.meta.env.BASE_URL}images/profiles/user_003.jpg`}
+                src={`${import.meta.env.BASE_URL}images/profiles/user_003.jpg`}
               alt={post.user}
               className="w-full h-full object-cover rounded-full"
             />
