@@ -22,23 +22,34 @@ import UploadModal from '../components/layout/UploadModal';
 const ReFrame = () => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All');
+ 
 
   const regularPost = {
-    id: 1,
-    user: "Sarah B.",
-    description: "I need your help. Can someone help me get abs or a fit body? Thanks to everyone who can assist.",
-    edits: [
-      { editor: "Alex", tool: "Midjourney" },
-      { editor: "Maya", tool: "Photoshop" }
-    ]
-  };
+  id: 1,
+  user: {
+    name: "Sarah B.",
+    commentsCount: 12,
+    likesCount: 45
+  },
+  description: "I need your help. Can someone help me get abs or a fit body? Thanks to everyone who can assist.",
+  edits: [
+    { editor: "Alex", tool: "Midjourney", commentsCount: 5, likesCount: 20 },
+    { editor: "Maya", tool: "Photoshop", commentsCount: 8, likesCount: 30 }
+  ]
+};
 
-  const pyramidPost = {
-    id: 2,
-    user: "Emily R.",
-    description: "Hey champs! A friend just got engaged, but she's disappointed she wasn't wearing white...  Can you change the green to white? Thanks! 😊"
-  };
+const pyramidPost = {
+  id: 2,
+  user: {
+    name: "Emily R.",
+    commentsCount: 20,
+    likesCount: 60
+  },
+  description: "Hey champs! A friend just got engaged, but she's disappointed she wasn't wearing white...  Can you change the green to white? Thanks! 😊"
+};
 
+
+  
   return (
     <div className="min-h-screen bg-gray-50">
        
