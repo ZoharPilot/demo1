@@ -5,7 +5,6 @@ const StoryBanner = () => {
 
   return (
     <div className="bg-white p-4">
-      <h2 className="text-lg font-semibold mb-3">Top Reframes</h2>
       <div className="flex overflow-x-auto gap-4 pb-2">
         {names.map((name, index) => (
           <div key={name} className="flex-none">

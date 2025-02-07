@@ -11,7 +11,7 @@ function App() {
     <Router basename={basename}>
       <Routes>
         <Route path="/" element={<ReFrame />} />
-        <Route path="/user-profile" element={<UserProfile />} />
+          <Route path="/user-profile/:userId" element={<UserProfile />} />
       </Routes>
     </Router>
   );
