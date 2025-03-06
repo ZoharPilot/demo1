@@ -15,10 +15,10 @@ const RegularPost = ({ post }) => {
   const userId = post.userId || (getUserByName(post.user?.name)?.id ?? null);
   const { user, loading, error } = useUser(userId);
 
-  console.log("🔍 post data:", post);
-  console.log("🔍 post.user.name:", post.user?.name);
-  console.log("🔍 userId used:", userId);
-  console.log("🔍 Found user:", getUserByName(post.user?.name));
+  //console.log("🔍 post data:", post);
+  //console.log("🔍 post.user.name:", post.user?.name);
+  //console.log("🔍 userId used:", userId);
+  //console.log("🔍 Found user:", getUserByName(post.user?.name));
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [modalData, setModalData] = useState(null);
@@ -45,7 +45,7 @@ const RegularPost = ({ post }) => {
         </div>
 
         {/* Request Description */}
-        <p className="text-gray-700 mb-4">{post.description}</p>
+        <p className="text-gray-700 mb-4">{post.request}</p>
 
         {/* Images Scroll */}
         <div className="overflow-x-auto pb-6">
@@ -65,14 +65,13 @@ const RegularPost = ({ post }) => {
               <img src={`${import.meta.env.BASE_URL}images/Feeds/r/1.png`} 
                    alt="Original request" 
                    className="w-64 h-48 object-cover rounded-lg shadow-md" />
-              <div className="p-4 flex flex-col">
+              <div className="p-0 flex flex-col">
                 <p className="text-sm font-medium">
                   <Link to={`/user-profile/${user.id}`} className="text-blue-600 hover:underline">
                     {user.name}
                   </Link>
                 </p>
-                <p className="text-xs text-gray-500">Original</p>
-
+                <p className="text-xs text-gray-500">Source</p>
                 <div className="flex items-center gap-3 text-gray-600 mt-1">
                   <Heart size={16} />
                   <span className="text-sm">{user.likesCount}</span>
@@ -83,45 +82,43 @@ const RegularPost = ({ post }) => {
             </div>
 
             {/* Editor's Images */}
-            {post.edits.map((edit, index) => {
-              const editorUser = getUserByName(edit.editor);
-              return (
-                <div key={index} className="flex-none relative cursor-pointer" 
-                  onClick={() => {
-                    setSelectedImage(`${import.meta.env.BASE_URL}images/Feeds/r/${index + 2}.png`);
-                    setModalData(edit);
-                  }}>
-                  
-                  {/* Edit Step Number */}
-                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold z-10 border-2 border-white shadow-lg">
-                    {index + 1}
-                  </div>
+       {post.edits.map((edit, index) => {
+            const editorUser = users[edit.editorId]; // ✅ שולף משתמש לפי ID
 
-                  <img src={`${import.meta.env.BASE_URL}images/Feeds/r/${index + 2}.png`} 
-                      alt={`${editorUser ? editorUser.name : edit.editor}'s edit`} 
-                      className="w-64 h-48 object-cover rounded-lg shadow-md" />
-                  <div className="p-4 flex flex-col">
-                    {editorUser ? (
-                      <p className="text-sm font-medium">
-                        <Link to={`/user-profile/${editorUser.id}`} className="text-blue-600 hover:underline">
-                          {editorUser.name}
-                        </Link>
-                      </p>
-                    ) : (
-                      <p className="text-sm font-medium">{edit.editor}</p>
-                    )}
-                    <p className="text-xs text-gray-500">{edit.tool}</p>
+            return (
+              <div key={index} className="flex-none relative cursor-pointer" 
+                onClick={() => {
+                  setSelectedImage(`${import.meta.env.BASE_URL}images/Feeds/r/${index + 2}.png`);
+                  setModalData(edit);
+                }}>
 
-                    <div className="flex items-center gap-3 text-gray-600 mt-1">
-                      <Heart size={16} />
-                      <span className="text-sm">{edit.likesCount}</span>
-                      <MessageCircle size={16} />
-                      <span className="text-sm">{edit.commentsCount}</span>
-                    </div>
+                {/* מספר שלב בעריכה */}
+                <div className="absolute -top-3 -left-3 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold z-10 border-2 border-white shadow-lg">
+                  {index + 1}
+                </div>
+
+                <img src={`${import.meta.env.BASE_URL}images/Feeds/r/${index + 2}.png`} 
+                    alt={`${editorUser?.name || "Unknown Editor"}'s edit`} 
+                    className="w-64 h-48 object-cover rounded-lg shadow-md" />
+                <div className="p-0 flex flex-col">
+                  <p className="text-sm font-medium">
+                    <Link to={`/user-profile/${editorUser?.id}`} className="text-blue-600 hover:underline">
+                      {editorUser?.name || "Unknown Editor"}
+                    </Link>
+                  </p>
+                  <p className="text-xs text-gray-500">{edit.tool}</p>
+
+                  <div className="flex items-center gap-3 text-gray-600 mt-1">
+                    <Heart size={16} />
+                    <span className="text-sm">{edit.likesCount}</span>
+                    <MessageCircle size={16} />
+                    <span className="text-sm">{edit.commentsCount}</span>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            );
+          })}
+
           </div>
         </div>
       </div>

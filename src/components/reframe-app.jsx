@@ -1,9 +1,14 @@
 import { Bell, Home, Plus, User } from 'lucide-react';
 import React, { useState } from 'react';
+import { edits } from '../data/edits';
+import { uploads } from '../data/uploads';
+import { users } from '../data/users';
 // reframe-app.jsx
+
 
 import PyramidPost from '../components/feed/PyramidPost';
 import RegularPost from '../components/feed/RegularPost';
+
 import StoryBanner from '../components/feed/StoryBanner';
 import Header from '../components/layout/Header';
 import UploadModal from '../components/layout/UploadModal';
@@ -12,43 +17,74 @@ import FilterBar from '../components/shared/FilterBar';
 const ReFrame = () => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All');
+  const [selectedPostType, setSelectedPostType] = useState('regular');
 
- const regularPost = {
-    id: 1,
-    userId: "user_003", // ✅ הוספנו userId כדי לחבר לנתוני המשתמשים
-    user: {
-      name: "Sarah B.",
-      commentsCount: 12,
-      likesCount: 45
-    },
-    description: "I need your help. Can someone help me get abs or a fit body? Thanks to everyone who can assist.",
-    edits: [
-      { editor: "Alex Martinez", tool: "Midjourney", commentsCount: 5, likesCount: 20 },
-      { editor: "Maya Cohen", tool: "Photoshop", commentsCount: 8, likesCount: 30 }
-    ]
-};
+  const regularPost = uploads.find(upload => upload.id === 'upload_001');
 
+  if (regularPost) {
+    regularPost.user = users[regularPost.userId] ? {
+      id: users[regularPost.userId].id,
+      name: users[regularPost.userId].name || "Unknown User",
+      commentsCount: regularPost.comments || 0,
+      likesCount: regularPost.likes || 0
+    } : { id: null, name: "Unknown User", commentsCount: 0, likesCount: 0 };
 
-  const pyramidPost = {
-    id: 2,
-    userId: "user_002", // ✅ הוספת userId כדי להקל על זיהוי המשתמש
-    userName: "Michael Chen", // ✅ עכשיו PyramidPost.jsx יוכל למצוא את המשתמש
-    user: {
-      name: "Michael Chen",
-      commentsCount: 20,
-      likesCount: 60
-    },
-    description: "Hey champs! A friend just got engaged, but she's disappointed she wasn't wearing white... Can you change the green to white? Thanks! 😊",
-    edits: [
-      { step: 0, isOriginal: true, editor: "Emily R.", tool: "Upload", likesCount: 10, commentsCount: 2, isVideo: false },
-      { step: 1, editor: "Lior", tool: "Midjourney", likesCount: 50, commentsCount: 10, isVideo: false },
-      { step: 2, editor: "Maya", tool: "Photoshop", likesCount: 80, commentsCount: 15, isVideo: false },
-      { step: 3, editor: "Yoni", tool: "Sora", likesCount: 110, commentsCount: 20, isVideo: true }  
-    ]
-};
+    regularPost.edits = edits
+      .filter(edit => edit.originalUploadId === regularPost.id)
+      .map(edit => ({
+        id: edit.id,
+        editorId: users[edit.editorId]?.id || "Unknown",
+        editorName: users[edit.editorId]?.name || "Unknown Editor",
+        tool: edit.toolsUsed.join(', '),
+        commentsCount: edit.comments || 0,
+        likesCount: edit.likes || 0,
+        imageUrl: edit.url || "/images/default.jpg"
+      }));
+  }
 
+  const pyramidPost = uploads.find(upload => upload.id === 'upload_002');
 
-  console.log("🔍 ReFrame is passing `pyramidPost`:", pyramidPost); // בדיקת הנתונים במסוף
+ if (pyramidPost) {
+  const postUser = users[pyramidPost.userId];
+
+  pyramidPost.user = postUser
+    ? {
+        id: postUser.id,
+        name: postUser.name || "Unknown User",
+        commentsCount: pyramidPost.comments || 0,
+        likesCount: pyramidPost.likes || 0,
+      }
+    : {
+        id: null,
+        name: "Unknown User",
+        commentsCount: 0,
+        likesCount: 0,
+      };
+
+  pyramidPost.edits = edits
+    .filter(edit => edit.originalUploadId === pyramidPost.id)
+    .map((edit, index) => ({
+      step: index,
+      isOriginal: index === 0,
+      editorId: users[edit.editorId]?.id || "Unknown",
+      editorName: users[edit.editorId]?.name || "Unknown Editor",
+      tool: edit.toolsUsed.join(", "),
+      likesCount: edit.likes,
+      commentsCount: edit.comments,
+      filetype: edit.filetype,
+    }));
+}
+
+ 
+
+  //console.log("🔍 Pyramid Post Object:", pyramidPost);
+//console.log("🔍 Pyramid Post User:", pyramidPost?.user);
+//console.log("🔍 Matching User in users:", users[pyramidPost?.userId]);
+
+ // console.log("🔍 All Uploads Data:", uploads);
+ // console.log("🔍 Pyramid Post Data:", pyramidPost);
+  //console.log("🔍 Pyramid Post Edits:", pyramidPost?.edits);
+  // {regularPost && <RegularPost post={regularPost} />}
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -60,9 +96,8 @@ const ReFrame = () => {
           activeFilter={activeFilter}
           onFilterChange={setActiveFilter}
         />
-      <RegularPost post={regularPost} />
-        <PyramidPost post={pyramidPost} />
-          
+        {regularPost && <RegularPost post={regularPost} />}
+        {pyramidPost && <PyramidPost post={pyramidPost} />}
       </main>
 
       <nav className="fixed bottom-0 w-full bg-white border-t border-gray-200">
@@ -97,6 +132,8 @@ const ReFrame = () => {
         <UploadModal
           isOpen={showUploadModal}
           onClose={() => setShowUploadModal(false)}
+          selectedPostType={selectedPostType}
+          setSelectedPostType={setSelectedPostType}
         />
       )}
     </div>
