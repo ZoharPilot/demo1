@@ -1,5 +1,6 @@
 import { Bell, Home, Plus, User } from 'lucide-react';
 import React, { useState } from 'react';
+import Header, { ContributorsSection } from '../components/layout/Header';
 import { edits } from '../data/edits';
 import { uploads } from '../data/uploads';
 import { users } from '../data/users';
@@ -10,7 +11,6 @@ import PyramidPost from '../components/feed/PyramidPost';
 import RegularPost from '../components/feed/RegularPost';
 
 import StoryBanner from '../components/feed/StoryBanner';
-import Header from '../components/layout/Header';
 import UploadModal from '../components/layout/UploadModal';
 import FilterBar from '../components/shared/FilterBar';
 
@@ -87,10 +87,10 @@ const ReFrame = () => {
   // {regularPost && <RegularPost post={regularPost} />}
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <Header />
-
       <main className="pt-24 pb-24">
+        <ContributorsSection />
         <StoryBanner />
         <FilterBar 
           activeFilter={activeFilter}

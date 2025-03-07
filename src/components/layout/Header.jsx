@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header className="fixed top-0 w-full bg-gray-100 shadow-md z-10">
       <div className="flex justify-between items-center px-6 py-4 whitespace-nowrap">
-        <div className="w-1/3"></div> {/* רווח לשמירה על איזון */}
+        <div className="w-1/3"></div> 
         <h1 className="text-xl font-semibold text-gray-800 tracking-wide w-1/3 text-center flex items-center justify-center">
            Reframe
         </h1>
@@ -20,4 +20,14 @@ const Header = () => {
   );
 };
 
+const ContributorsSection = () => {
+  return (
+    <div className="text-gray-800 text-center text-sm font-medium mt-0 mb-0">
+      <h3>Top Contributors of the Month</h3>
+    </div>
+  );
+};
+
 export default Header;
+export { ContributorsSection };
+
