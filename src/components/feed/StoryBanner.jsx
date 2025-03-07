@@ -29,5 +29,4 @@ const StoryBanner = () => {
     </div>
   );
 };
-
 export default StoryBanner;

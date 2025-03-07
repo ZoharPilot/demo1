@@ -22,7 +22,7 @@ const RegularPost = ({ post }) => {
 
   return (
     <div className="bg-white mt-2 p-4">
-      <div className="mb-6">
+      <div className="mb-1">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200">
             <img 
